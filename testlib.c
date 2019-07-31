@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include <stdlib.h>
+#include <stdlib.h>
 
 #define COLOR_DEFAULT	"\033[0m"
 #define COLOR_GREEN		"\033[0;36m"
@@ -111,4 +112,9 @@ void print_test_results() {
     
     test = test->next;
   }
+
+  if (TEST_RESULT == 0)
+    exit(1);
+
+  exit(0);
 }

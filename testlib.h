@@ -12,8 +12,7 @@
 
 #define QUICKTEST(test_name)                    \
   set_test_name(test_name);                     \
-  print_test_results();                         \
-  exit(1);
+  print_test_results();
 
 typedef struct test* Test;
 
