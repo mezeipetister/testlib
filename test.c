@@ -18,7 +18,6 @@ void this_is_a_demo_test_function_very_long() {
 }
 
 int main() {
-  false_test();
   true_test();
   true_test();
   true_test();
