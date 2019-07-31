@@ -83,7 +83,7 @@ void add_test(char function_name[50], int _result) {
 Print test results
 Currently there is no input param*/
 void print_test_results() {
-  char res_msg[30] = "COLOR_GREENPASS";
+  char res_msg[30] = "PASS";
   if (TEST_RESULT == 0)
     strcpy(res_msg,COLOR_RED "FAIL" COLOR_DEFAULT);
 
