@@ -24,7 +24,7 @@ int main() {
   true_test();
   true_test();
   true_test2();
-  false_test();
+  /* false_test(); */
   this_is_a_demo_test_function_very_long();
   QUICKTEST("demo_peti");
 }
