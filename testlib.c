@@ -18,6 +18,10 @@ Test result variable.
 0 false (test fail), 1 true (test pass)*/
 static int TEST_RESULT = 1;
 
+static int TEST_NUMBER_ALL = 0;
+static int TEST_NUMBER_SUCCESS = 0;
+static int TEST_NUMBER_FAIL = 0;
+
 typedef struct test Test;
 
 struct test {
@@ -59,6 +63,19 @@ Test* get_last_test_ptr(Test* test){
 
 // TODO: Ugly code, clean it!
 void add_test(char function_name[50], int _result) {
+  // Increment test number;
+  TEST_NUMBER_ALL++;
+  
+  switch(_result){
+  case 0:
+    // IF TEST FAIL
+    TEST_NUMBER_FAIL++;
+    break;
+  case 1:
+    // IF TEST SUCCESS
+    TEST_NUMBER_SUCCESS++;
+  }
+  
   // If test result is 0, then the main TEST_RESULT
   // must be 0;
   if(_result == 0)
@@ -83,29 +100,27 @@ void add_test(char function_name[50], int _result) {
 Print test results
 Currently there is no input param*/
 void print_test_results() {
-  char res_msg[30] = "PASS";
+
+  char res_msg[30] = COLOR_GREEN "PASS" COLOR_DEFAULT;
   if (TEST_RESULT == 0)
     strcpy(res_msg,COLOR_RED "FAIL" COLOR_DEFAULT);
-
-  char welcome_msg[100] = "\n\n\
---------------------------\n\
-|   Unit tests results   |\n\
---------------------------\n\
-\n\n";
   
-  printf("%s", welcome_msg);	/*Print test name*/
-  printf("Test: %s\n", TEST_NAME);
-  printf("Test: %s\n", res_msg);
+  /* printf("Test: %s\n", TEST_NAME); */
+  printf("\nTest %s\n", res_msg);
 
-  printf("Result\tName\n");
-  printf("---------------------------\n");
+  printf("Running %d tests %d passed %d failed\n\n\n",
+         TEST_NUMBER_ALL,
+         TEST_NUMBER_SUCCESS,
+         TEST_NUMBER_FAIL);
+
+  /* printf("---------------------------\n"); */
   Test* test = result;
   while(1){
-    char _res[30] = "(OK)";
+    char _res[30] = "OK";
     if(test->result == 0)
-      strcpy(_res, COLOR_RED "(FAIL)" COLOR_DEFAULT);
+      strcpy(_res, COLOR_RED "FAIL" COLOR_DEFAULT);
     
-    printf("%s\t%s\n", _res, test->function_name);
+    printf("(%s)\t%s\n", _res, test->function_name);
 
     if (test->next == NULL)
       break;
